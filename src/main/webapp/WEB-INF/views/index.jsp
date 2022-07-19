@@ -9,20 +9,28 @@
 <head>
 <title>이용후기</title>
 </head>
+<style>
+.button{
 
+/* background:lightblue; */
+border: solid #cdd0d1;
+cursor: pointer;
+}
+</style>
 <body>
-	<table cellspacing=1 width=600 border=1>
+<h2> 자전거 무료대여 이용후기</h2>
+	<table cellspacing=3 width=600 border=1>
 			<tr>
-				<td width=20><p align=center>
+				<td bgcolor="lightpink" width=20><p align=center>
 						<b>번호</b>
 					</p></td>
-				<td width=100><p align=center>
+				<td bgcolor="lightpink" width=100><p align=center>
 						<b>제목</b>
 					</p></td>
-				<td width=20><p align=center>
-						<b>조회수</b>
+				<td bgcolor="lightpink" width=20><p align=center>
+						<b>작성자</b>
 					</p></td>
-				<td width=50><p align=center>
+				<td bgcolor="lightpink" width=50><p align=center>
 						<b>등록일</b>
 					</p></td>
 			</tr>
@@ -31,18 +39,17 @@
 			<c:forEach var="comment" items="${comments}">
 				<tr>
 					<td><p align=center><c:out value="${comment.id}" /></p></td>
-					<td><c:out value="${comment.title}" /></td>
-					<td><p align=center><c:out value="${comment.viewcnt}" /></p></td>
+ 					<td><a href="<c:out value="selectOne/${comment.id}"/>"><c:out value="${comment.title}" /></a></td>
+					<td><p align=center><c:out value="${comment.writer}" /></p></td>
 					<td><p align=center><c:out value="${fn:substring(comment.date, 0, 11)}" /></p></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<br>
 	<table>
 		<tr>
-			<td width=550></td>
-			<td><input type="button" value=신규 "></input></td>
+			<td width=535></td>
+			<td><a href="./insertForm"><input type="button" value=글쓰기 class="button"></a></td>
 		</tr>
 	</table>
 
