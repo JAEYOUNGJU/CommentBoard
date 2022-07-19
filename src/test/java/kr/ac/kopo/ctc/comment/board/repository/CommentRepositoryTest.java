@@ -1,4 +1,4 @@
-package kr.ac.kopo.ctc.comment.board.repository;
+/* package kr.ac.kopo.ctc.comment.board.repository;
 
 import java.util.Date;
 import java.util.List;
@@ -82,5 +82,5 @@ public class CommentRepositoryTest {
 //	}
 
 }
-
+*/
 
