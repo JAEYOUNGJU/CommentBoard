@@ -21,10 +21,15 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Comment> findAllById(int id) {
+	public List<Comment> findOneById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return commentRepository.findOneById(id);
 	}
 
+	@Override
+	public void commentSave(Comment comment) {
+		commentRepository.save(comment);
+		
+	}
 
 }
