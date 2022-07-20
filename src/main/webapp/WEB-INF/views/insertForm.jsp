@@ -23,52 +23,58 @@ textarea {
 	text-align: left;
 	resize: none;
 }
-.input{
-border-bottom : 2px solid black;
+
+.input {
+	border-bottom: 2px solid black;
 }
-.input2{
-border : 2px solid black;
+
+.input2 {
+	border: 2px solid black;
 }
 </style>
 <body>
-<div align=center>
-<br>
-<h4><b> ♡리뷰 작성하기♡</b></h4>
-	<form action="insert" method="post">
-		<table cellspacing=3 width=700 border=1>
+	<div align=center>
+		<br>
+		<h4>
+			<b> ♡리뷰 작성하기♡</b>
+		</h4>
+		<form action="insert" method="post">
+			<table cellspacing=3 width=700 border=1>
 
-			<tr>
-				<td bgcolor="lightpink" width=20 style="text-align: center"><b>번호</b></td>
-				<td><input type=hidden name=id>자동부여</td>
-			</tr>
-			<tr>
-				<td bgcolor="lightpink" width=100 style="text-align: center"><b>제목</b></td>
-				<td><input type="text" name="title" required class="input"></td>
-			</tr>
-			<tr>
-				<td bgcolor="lightpink" width=20 style="text-align: center"><b>작성자</b></td>
-				<td><input type="text" name="writer" required class="input"></td>
-			</tr>
-			<tr>
-				<td bgcolor="lightpink" width=50 style="text-align: center"><b>등록일</b></td>
-				<td><c:out value="${today}" /></td>
-			</tr>
-			<tr>
-				<td bgcolor="lightpink" width=20 style="text-align: center"><b>내용</b></td>
-				<td><textarea
-						style='width: 500px; height: 250px; overflow-y: scroll'
-						name=content cols=70 row=600 required class="input2"></textarea></td>
-			</tr>
+				<tr>
+					<td bgcolor="lightpink" width=20 style="text-align: center"><b>번호</b></td>
+					<td><input type=hidden name=id>자동부여</td>
+				</tr>
+				<tr>
+					<td bgcolor="lightpink" width=100 style="text-align: center"><b>제목</b></td>
+					<td><input type="text" name="title" required class="input"></td>
+				</tr>
+				<tr>
+					<td bgcolor="lightpink" width=20 style="text-align: center"><b>작성자</b></td>
+					<td><input type="text" name="writer" required class="input"></td>
+				</tr>
+				<tr>
+					<td bgcolor="lightpink" width=50 style="text-align: center"><b>등록일</b></td>
+					<td><c:out value="${today}" /></td>
+				</tr>
+				<tr>
+					<td bgcolor="lightpink" width=20 style="text-align: center"><b>내용</b></td>
+					<td><textarea
+							style='width: 500px; height: 250px; overflow-y: scroll'
+							name=content cols=70 row=600 required class="input2"></textarea></td>
+				</tr>
 
-		</table>
-		<table>
-			<tr>
-				<td width=600></td>
-				<td><a href="./insert"><input type="submit" value="입력"	class="button"></a></td>
-				<td><a href="./index"><input type="button" value="목록"	class="button"></a></td>
-			</tr>
-		</table>
-	</form>
+			</table>
+			<table>
+				<tr>
+					<td width=600></td>
+					<td><a href="./insert"><input type="submit" value="입력"
+							class="button"></a></td>
+					<td><a href="./index"><input type="button" value="목록"
+							class="button"></a></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </body>
 </html>

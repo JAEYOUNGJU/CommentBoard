@@ -15,27 +15,25 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Entity //데이터베이스 구조 만들기 -> CRUD 작업
+@Entity // 데이터베이스 구조 만들기 -> CRUD 작업
 public class Comment {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long id;
-	
+
 	@Column
 	private String title;
-	
+
 	@Column
 	private String writer;
-	
+
 	@Column
 	private Date date;
-	
+
 	@Column
 	private String content;
-	
 
 	public Long getId() {
 		return id;
@@ -77,13 +75,12 @@ public class Comment {
 		this.content = content;
 	}
 
-	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "comment")
 	// mappedBy 양방향 관계 설정시 관계의 주체가 되는 쪽에서 정의함
 	// 부모입장에서 fetch = FetchType.LAZY 은 기본값
-	
-	private List<CommentReply> commentReplys; 
+
+	private List<CommentReply> commentReplys;
 
 	public List<CommentReply> getCommentReplys() {
 		if (commentReplys == null) {
@@ -100,6 +97,5 @@ public class Comment {
 		List<CommentReply> commentReplys = getCommentReplys();
 		commentReplys.add(c);
 	}
-
 
 }

@@ -35,7 +35,7 @@ public class CommentReply {
 	private int recnt;
 	@Column
 	private int relevel;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -43,7 +43,6 @@ public class CommentReply {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public Date getDate() {
 		return date;
@@ -76,6 +75,7 @@ public class CommentReply {
 	public void setRelevel(int relevel) {
 		this.relevel = relevel;
 	}
+
 	public Comment getcomment() {
 		return comment;
 	}
@@ -83,12 +83,10 @@ public class CommentReply {
 	public void setBoardGroup(Comment comment) {
 		this.comment = comment;
 	}
+
 	@JsonBackReference
-	@ManyToOne(fetch=FetchType.LAZY) // BoardGroup이 없는 BoardItem은 없다는 조건이므로 Inner join을 수행한다. 
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "comment_id")
 	private Comment comment;
-//Comment c = new Comment();
-//c.getRootId();
 
-	}
-
+}
