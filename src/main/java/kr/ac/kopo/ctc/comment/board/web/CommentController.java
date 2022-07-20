@@ -1,10 +1,16 @@
 package kr.ac.kopo.ctc.comment.board.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +25,14 @@ public class CommentController {
 
 	@Autowired
 	private CommentServiceImpl commentServiceImpl;
+	@Autowired
+	CommentRepository commentRepository;
+	
+   @InitBinder
+   protected void initBinder(WebDataBinder binder) { 
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+      binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,true));
+   }
 	// 보여주기 용
 	@RequestMapping(value = "/index")
 	public String index(Model model) {
@@ -28,47 +42,48 @@ public class CommentController {
 		return "index";
 	}
 	// 변수 1개? 정도 받아와서 보여주기, 댓글 묶음이나 게시글 하나 
-	@RequestMapping(value = "/selectOne/{id}")
-	public String commentView(Model model, @PathVariable("id") int id) { //특정 글 상세보기
-		model.addAttribute("selectOne", commentServiceImpl.findOneById(id));
+	@RequestMapping(value = "/selectOne/{id}")//특정 글 상세보기
+	public String commentView(Model model, @PathVariable("id") Long id) { //controller에서 parameter 받는 방법:@pathVariable 
+		model.addAttribute("selectOne", commentServiceImpl.findOneById(id)); //Model : 해당 데이터를 가지고 view까지 이동
 		return "selectOne";
 	}
-	
+
 	@RequestMapping(value = "/insertForm")
-	public String commentInsertform(Model model, @PathVariable("id") int id) { //사용자 입력화면
-		model.addAttribute("selectOne", commentServiceImpl.findOneById(id));
+	public String commentInsertForm() { //사용자 입력화면
 		return "insertForm";
 	}
-	// 추측, 데이터 넣을때 쓸 것 
-	@RequestMapping(value = "/insertForm/requestBody")
-	public String commentInsert(Model model, @RequestBody Comment comment) { //사용자 입력데이터 동작처리
-		commentServiceImpl.commentSave(comment);
-		model.addAttribute("itemsml 이름", "보낼 값");
-		return "받는jsp파일이름";
+
+	@RequestMapping(value = "/insert")
+	public String commentInsert(Comment comment) { //사용자 입력화면
+		comment.setDate(new Date());
+		commentRepository.save(comment);
+		return "redirect:/comment/index";
 	}
 	
-	@RequestMapping(value = "/update/{id}")
-	public String commentUpdate(Model model, @PathVariable("id") int id) { //사용자 수정화면
+	@RequestMapping(value = "/updateForm/{id}")
+	public String commentUpdateForm(Model model, @PathVariable("id") Long id) { // 특정 글 상세보기
 		model.addAttribute("selectOne", commentServiceImpl.findOneById(id));
-		return "update";
+		return "updateForm";
 	}
 	
-	@RequestMapping(value = "/updateDB/{id}")
-	public String commentUpdateDB(Model model, @PathVariable("id") int id) { //사용자 수정데이터 동작처리
-		model.addAttribute("selectOne", commentServiceImpl.findOneById(id));
-		return "updateDB";
+	
+	@RequestMapping(value = "/updateForm/update/{id}")
+	public String commentUpdate(Comment comment) { //사용자 입력화면
+		comment.setDate(new Date());
+		commentRepository.save(comment);
+		return "redirect:/comment/index";
 	}
 	
 	@RequestMapping(value = "/reInsert/{id}")
-	public String commentReInsert(Model model, @PathVariable("id") int id) { //댓글 입력화면
+	public String commentReInsert(Model model, @PathVariable("id") Long id) { //댓글 입력화면
 		model.addAttribute("selectOne", commentServiceImpl.findOneById(id));
 		return "reInsert";
 	}
 	
 	@RequestMapping(value = "/delete/{id}")
-	public String commentDelete(Model model, @PathVariable("id") int id) { //게시글 삭제화면
-		model.addAttribute("selectOne", commentServiceImpl.findOneById(id));
-		return "delete";
+	public String commentDelete(@PathVariable Long id) { //게시글 삭제
+		commentRepository.deleteById(id);
+		return "redirect:/comment/index";
 	}
 
 }
