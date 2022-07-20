@@ -26,32 +26,31 @@ public class CommentReply {
 	// 기본키를 자동으로 생성할 때 @GeneratedValue 어노테이션이 함께 사용됨
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int id;
+	private Long id;
 	@Column
-	private String title;
+	private Date date;
 	@Column
 	private String writer;
-	@Column
-	private int rootid;
 	@Column
 	private int recnt;
 	@Column
 	private int relevel;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+
+	public Date getDate() {
+		return date;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getWriter() {
@@ -60,14 +59,6 @@ public class CommentReply {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
-	}
-
-	public int getRootid() {
-		return rootid;
-	}
-
-	public void setRootid(int rootid) {
-		this.rootid = rootid;
 	}
 
 	public int getRecnt() {

@@ -4,13 +4,16 @@ import java.util.List;
 
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
+import kr.ac.kopo.ctc.comment.board.repository.CommentRepository;
 
 public interface CommentService {
 
+	
+	
 	List<Comment> findAll();
 	
-	List<Comment> findOneById(int id);
+	List<Comment> findOneById(Long id);
 
-	void commentSave(Comment comment);
+
 }
 

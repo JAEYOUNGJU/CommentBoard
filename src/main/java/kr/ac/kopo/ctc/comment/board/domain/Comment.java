@@ -22,7 +22,7 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int id;
+	private Long id;
 	
 	@Column
 	private String title;
@@ -36,20 +36,12 @@ public class Comment {
 	@Column
 	private String content;
 	
-	@Column
-	private int relevel;
-	
-	@Column
-	private int recnt;
-	
-	@Column
-	private int rootid;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -85,29 +77,6 @@ public class Comment {
 		this.content = content;
 	}
 
-	public int getRelevel() {
-		return relevel;
-	}
-
-	public void setRelevel(int relevel) {
-		this.relevel = relevel;
-	}
-
-	public int getRecnt() {
-		return recnt;
-	}
-
-	public void setRecnt(int recnt) {
-		this.recnt = recnt;
-	}
-
-	public int getRootid() {
-		return rootid;
-	}
-
-	public void setRootid(int rootid) {
-		this.rootid = rootid;
-	}
 	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "comment")
@@ -131,5 +100,6 @@ public class Comment {
 		List<CommentReply> commentReplys = getCommentReplys();
 		commentReplys.add(c);
 	}
+
 
 }

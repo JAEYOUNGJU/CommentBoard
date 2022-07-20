@@ -13,11 +13,11 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
 
-public interface CommentRepository extends JpaRepository<Comment, Integer>, JpaSpecificationExecutor<Comment>{
+public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpecificationExecutor<Comment>{
 	// selectOne
-	List<Comment> findOneById(int id); // id 반환
+	List<Comment> findOneById(Long id); // id 반환
 
-	//insert ㅓㅂ데이트 - save로 처리! 땅땅! 안짜도 됨
+	//insert , update -> save로 처리! 땅땅! 안짜도 됨
 	
 	
 	
