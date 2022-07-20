@@ -30,11 +30,21 @@ public class CommentReply {
 	@Column
 	private Date date;
 	@Column
+	private String content;
+	@Column
 	private String writer;
 	@Column
 	private int recnt;
 	@Column
 	private int relevel;
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	public Long getId() {
 		return id;
