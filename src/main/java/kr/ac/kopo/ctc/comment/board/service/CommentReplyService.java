@@ -1,5 +1,12 @@
 package kr.ac.kopo.ctc.comment.board.service;
 
-public interface CommentReplyService {
+import java.util.List;
 
+import kr.ac.kopo.ctc.comment.board.domain.Comment;
+import kr.ac.kopo.ctc.comment.board.domain.CommentReply;
+
+public interface CommentReplyService {
+	List<CommentReply> findAll();
+
+	List<CommentReply> findOneById(Long id);
 }
