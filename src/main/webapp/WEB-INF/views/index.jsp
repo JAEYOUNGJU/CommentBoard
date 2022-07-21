@@ -27,16 +27,16 @@
 		</h4>
 		<table cellspacing=3 width=600 height=100 border=1>
 			<tr>
-				<td bgcolor="lightpink" width=20 height=50><p align=center>
+				<td bgcolor="plum" width=20 height=50><p align=center>
 						<b>번호</b>
 					</p></td>
-				<td bgcolor="lightpink" width=100><p align=center>
+				<td bgcolor="plum" width=100><p align=center>
 						<b>제목</b>
 					</p></td>
-				<td bgcolor="lightpink" width=20><p align=center>
+				<td bgcolor="plum" width=20><p align=center>
 						<b>작성자</b>
 					</p></td>
-				<td bgcolor="lightpink" width=50><p align=center>
+				<td bgcolor="plum" width=50><p align=center>
 						<b>등록일</b>
 					</p></td>
 			</tr>
