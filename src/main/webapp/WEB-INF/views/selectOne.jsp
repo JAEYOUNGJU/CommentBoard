@@ -18,13 +18,15 @@
 .button {
 	border: solid #cdd0d1;
 	cursor: pointer;
+	font-size: 12px;
 }
 
 .button2 {
-	width: 80px;
-	height: 30px;
+	width: 70px;
+	height: 26px;
 	border: solid #cdd0d1;
 	cursor: pointer;
+	font-size: 12px;
 }
 
 textarea {
@@ -87,38 +89,73 @@ textarea {
 
 			<br>
 			<c:forEach var="commentReply" items="${selectReply}">
-				<table cellspacing=3 width=700 border=1 class="table2">
+				<table cellspacing=3 width=700 height=100 border=1 class="table2">
 
 					<tr>
-						<td bgcolor="YellowGreen" width=100 style="text-align: center"><b>번호</b></td>
-						<td width=70 align=center><c:out value="${commentReply.id}" /></td>
-						<td bgcolor="YellowGreen" width=100 style="text-align: center"><b>등록일</b></td>
-						<td align=center><c:out value="${today}" /></td>
-						<td align=center bgcolor="YellowGreen" width=100
+						<td bgcolor="YellowGreen" width=80 style="text-align: center"><b>번호</b></td>
+						<td colspan="2" width=30 align=center><c:out
+								value="${commentReply.id}" /></td>
+						<td align=center bgcolor="YellowGreen" width=150
 							style="text-align: center"><b>작성자</b></td>
 						<td align=center><c:out value="${commentReply.writer}" /></td>
-						<td style="border: 0"><input type="submit" value="댓글수정"
-							class="button2"></td>
+
+						<!-- 		<td bgcolor="YellowGreen" width=80 style="text-align: center"><b>등록일</b></td> -->
+						<td width=100 bgcolor="lightgrey" align=center><c:out
+								value="${today}" /></td>
+
 					</tr>
 					<tr>
 						<td bgcolor="YellowGreen" width=20 style="text-align: center"><b>댓글내용</b></td>
 						<td colspan="5"><textarea
-								style='width: 500px; height: 50px; overflow-y: scroll'	name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
-						<td style="border: 0"><input type="button" value="댓글삭제" class="button2" onClick="location.href='/comment/Reply2Delete/${commentReply.id}'"/></td>
+								style='width: 500px; height: 50px; overflow-y: scroll'
+								name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width=550></td>
+						<td style="border: 0"><input type="submit" value="댓글수정"
+							class="button2"></td>
+						<td><input type="button" value="댓글삭제" class="button2"
+							onClick="location.href='/comment/Reply2Delete/${commentReply.id}'" /></td>
 					</tr>
 				</table>
 			</c:forEach>
+		<h4>
+			<b> ▼</b>
+		</h4>
+		<p>
+
+			<br>
+		<form action="insert" method="post">
+				<table cellspacing=3 width=700 height=100 border=1 class="table2">
+
+					<tr>
+
+						<td align=center bgcolor="YellowGreen" width=80 style="text-align: center"><b>작성자</b></td>
+						<td width=50><input type="text" name="writer"required "></td>
+<%-- 						<td width=100 bgcolor="lightgrey" align=center><c:out value="${today}" /></td> --%>
+
+					</tr>
+					<tr>
+						<td bgcolor="YellowGreen" width=20 style="text-align: center"><b>댓글내용</b></td>
+						<td colspan="5"><textarea
+								style='width: 500px; height: 50px; overflow-y: scroll'
+								name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
+					
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width=625></td>
+						<td><input type="submit" value="댓글등록" class="button2"></td>
+							</tr>
+							</table>
+
+			</form>
 	</div>
 </body>
 </html>
 </head>
 
 
-<%-- <table width=650 align=center>
-   <tr>
-      <td width=400></td>
-      <td width=50><input type="button" value="목록" onclick="location.href='/BoardItem/list'"></td>
-      <td width=50><input type='button' value='수정' OnClick="location.href='/BoardItem/UpdateForm/${boardItem.id}'"></td>
-      <td width=50><input type='button' value='삭제' OnClick="location.href='/BoardItem/Delete/${boardItem.id}'"></td>
-</table>
- --%>

@@ -79,31 +79,6 @@ textarea {
 			</table>
 		</form>
 
-		<h4>
-			<b> ▼</b>
-		</h4>
-		<p>
-
-			<br>
-		<table cellspacing=3 width=700 border=1 class="table2">
-
-			<tr>
-				<td bgcolor="YellowGreen" width=70 style="text-align: center"><b>번호</b></td>
-				<td><input type=hidden name=id>자동부여</td>
-				<td bgcolor="YellowGreen" width=70 style="text-align: center"><b>등록일</b></td>
-				<td><c:out value="${today}" /></td>
-				<td bgcolor="YellowGreen" width=70 style="text-align: center"><b>작성자</b></td>
-				<td><input type="text" name="writer"required "></td>
-				<td rowspan="2" style="border: 0"><input type="submit"
-					value="댓글등록" class="button2"></a></td>
-			</tr>
-			<tr>
-				<td bgcolor="YellowGreen" width=20 style="text-align: center"><b>댓글내용</b></td>
-				<td colspan="5"><textarea
-						style='width: 500px; height: 50px; overflow-y: scroll'
-						name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
-			</tr>
-		</table>
 
 	</div>
 </body>
