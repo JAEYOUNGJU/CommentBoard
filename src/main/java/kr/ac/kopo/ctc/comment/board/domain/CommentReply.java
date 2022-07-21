@@ -33,10 +33,6 @@ public class CommentReply {
 	private String content;
 	@Column
 	private String writer;
-	@Column
-	private int recnt;
-	@Column
-	private int relevel;
 
 	public String getContent() {
 		return content;
@@ -68,22 +64,6 @@ public class CommentReply {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
-	}
-
-	public int getRecnt() {
-		return recnt;
-	}
-
-	public void setRecnt(int recnt) {
-		this.recnt = recnt;
-	}
-
-	public int getRelevel() {
-		return relevel;
-	}
-
-	public void setRelevel(int relevel) {
-		this.relevel = relevel;
 	}
 
 	public Comment getcomment() {
