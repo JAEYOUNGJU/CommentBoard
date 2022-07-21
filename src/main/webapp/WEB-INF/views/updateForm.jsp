@@ -33,24 +33,24 @@ textarea {
 		<table cellspacing=3 width=700 border=1>
 
 			<tr>
-				<td bgcolor="lightpink" width=20 style="text-align: center"><b>번호</b></td>
+				<td bgcolor="plum" width=20 style="text-align: center"><b>번호</b></td>
 				<td><input type="number" id="id" value="${comment.id}" readonly></td>
 
 			</tr>
 			<tr>
-				<td bgcolor="lightpink" width=100 style="text-align: center"><b>제목</b></td>
+				<td bgcolor="plum" width=100 style="text-align: center"><b>제목</b></td>
 				<td><input type="text" name="title" value="${comment.title}"></td>
 			</tr>
 			<tr>
-				<td bgcolor="lightpink" width=20 style="text-align: center"><b>작성자</b></td>
+				<td bgcolor="plum" width=20 style="text-align: center"><b>작성자</b></td>
 				<td><input type="text" name="writer" value="${comment.writer}" readonly></td>
 			</tr>
 			<tr>
-				<td bgcolor="lightpink" width=50 style="text-align: center"><b>등록일</b></td>
+				<td bgcolor="plum" width=50 style="text-align: center"><b>등록일</b></td>
 				<td><c:out value="${today}" /></td>
 			</tr>
 			<tr>
-				<td bgcolor="lightpink" width=20 style="text-align: center"><b>내용</b></td>
+				<td bgcolor="plum" width=20 style="text-align: center"><b>내용</b></td>
 				<td><textarea style='width: 500px; height: 250px; overflow-y: scroll'
 						name="content" cols=70 row=600 required>${comment.content}</textarea></td>
 			</tr>
