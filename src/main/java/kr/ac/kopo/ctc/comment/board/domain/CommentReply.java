@@ -23,16 +23,17 @@ import kr.ac.kopo.ctc.comment.board.domain.Comment;
 @Entity
 public class CommentReply {
 	@Id
-	// 기본키를 자동으로 생성할 때 @GeneratedValue 어노테이션이 함께 사용됨
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키를 자동으로 생성할 때 @GeneratedValue 어노테이션이 함께 사용됨
 	@Column
 	private Long id;
-	@Column
 	private Date date;
-	@Column
 	private String content;
-	@Column
 	private String writer;
+
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "comment_id")
+	private Comment comment;
 
 	public String getContent() {
 		return content;
@@ -70,13 +71,8 @@ public class CommentReply {
 		return comment;
 	}
 
-	public void setBoardGroup(Comment comment) {
+	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
-
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "comment_id")
-	private Comment comment;
 
 }

@@ -25,16 +25,16 @@ public class Comment {
 
 	@Column
 	private String title;
-
-	@Column
 	private String writer;
-
-	@Column
 	private Date date;
-
-	@Column
 	private String content;
 
+	// mappedBy 양방향 관계 설정시 관계의 주체가 되는 쪽에서 정의함
+	// 부모입장에서 fetch = FetchType.LAZY 은 기본값
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+	private List<CommentReply> commentReplys;
+	
 	public Long getId() {
 		return id;
 	}
@@ -74,13 +74,6 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "comment")
-	// mappedBy 양방향 관계 설정시 관계의 주체가 되는 쪽에서 정의함
-	// 부모입장에서 fetch = FetchType.LAZY 은 기본값
-
-	private List<CommentReply> commentReplys;
 
 	public List<CommentReply> getCommentReplys() {
 		if (commentReplys == null) {
