@@ -33,7 +33,7 @@
 				<td bgcolor="plum" width=100><p align=center>
 						<b>제목</b>
 					</p></td>
-				<td bgcolor="plum" width=20><p align=center>
+				<td bgcolor="plum" width=50><p align=center>
 						<b>작성자</b>
 					</p></td>
 				<td bgcolor="plum" width=50><p align=center>
