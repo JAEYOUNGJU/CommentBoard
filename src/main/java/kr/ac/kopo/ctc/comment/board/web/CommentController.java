@@ -10,12 +10,12 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
+import kr.ac.kopo.ctc.comment.board.domain.CommentReply;
 import kr.ac.kopo.ctc.comment.board.repository.CommentReplyRepository;
 import kr.ac.kopo.ctc.comment.board.repository.CommentRepository;
 import kr.ac.kopo.ctc.comment.board.service.CommentReplyServiceImpl;
@@ -29,6 +29,8 @@ public class CommentController {
 	private CommentServiceImpl commentServiceImpl;
 	@Autowired
 	CommentRepository commentRepository;
+	@Autowired
+	CommentReplyRepository commentReplyRepository;
 	@Autowired
 	private CommentReplyServiceImpl commentReplyServiceImpl;
 
@@ -60,9 +62,11 @@ public class CommentController {
 	}
 
 	@RequestMapping(value = "/insert")
-	public String commentInsert(Comment comment) { // 사용자가 입력한 데이터 동작 처리
+	public String commentInsert(Comment comment, CommentReply commentReply) { // 사용자가 입력한 데이터 동작 처리
 		comment.setDate(new Date());
+		commentReply.setDate(new Date());
 		commentRepository.save(comment);
+		commentReplyRepository.save(commentReply);
 		return "redirect:/comment/index";
 	}
 
