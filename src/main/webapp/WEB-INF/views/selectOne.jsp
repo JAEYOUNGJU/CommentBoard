@@ -86,7 +86,7 @@ textarea {
 		<p>
 
 			<br>
-			<c:forEach var="commentReply" items="${selectReply}"> <%-- <c:forEach var="변수이름" items="반복할 객체명"  --%>
+			<c:forEach var="commentReply" items="${selectReply}">
 				<table cellspacing=3 width=700 border=1 class="table2">
 
 					<tr>
@@ -103,10 +103,8 @@ textarea {
 					<tr>
 						<td bgcolor="YellowGreen" width=20 style="text-align: center"><b>댓글내용</b></td>
 						<td colspan="5"><textarea
-								style='width: 500px; height: 50px; overflow-y: scroll'
-								name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
-						<td style="border: 0"><input type="submit" value="댓글삭제"
-							class="button2"></td>
+								style='width: 500px; height: 50px; overflow-y: scroll'	name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
+						<td style="border: 0"><input type="button" value="댓글삭제" class="button2" onClick="location.href='/comment/Reply2Delete/${commentReply.id}'"/></td>
 					</tr>
 				</table>
 			</c:forEach>
@@ -114,3 +112,13 @@ textarea {
 </body>
 </html>
 </head>
+
+
+<%-- <table width=650 align=center>
+   <tr>
+      <td width=400></td>
+      <td width=50><input type="button" value="목록" onclick="location.href='/BoardItem/list'"></td>
+      <td width=50><input type='button' value='수정' OnClick="location.href='/BoardItem/UpdateForm/${boardItem.id}'"></td>
+      <td width=50><input type='button' value='삭제' OnClick="location.href='/BoardItem/Delete/${boardItem.id}'"></td>
+</table>
+ --%>

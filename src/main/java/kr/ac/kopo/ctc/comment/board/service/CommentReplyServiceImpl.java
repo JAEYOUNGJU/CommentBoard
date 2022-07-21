@@ -13,10 +13,6 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 	@Autowired
 	CommentReplyRepository commentReplyRepository;
 
-	public CommentReplyServiceImpl(CommentReplyRepository commentReplyRepository) {
-		this.commentReplyRepository = commentReplyRepository;
-	}
-
 	@Override
 	public List<CommentReply> findAll() {
 		return commentReplyRepository.findAll();
@@ -31,4 +27,11 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 	public List<CommentReply> showAllByReplyId(Long id) {
 		return commentReplyRepository.findAllByCommentId(id);
 	}
+
+	@Override
+	public void deleteById(Long id) {
+		commentReplyRepository.deleteById(id);
+
+	}
+
 }
