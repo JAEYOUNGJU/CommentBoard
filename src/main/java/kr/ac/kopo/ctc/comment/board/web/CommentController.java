@@ -10,12 +10,13 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
+import kr.ac.kopo.ctc.comment.board.repository.CommentReplyRepository;
 import kr.ac.kopo.ctc.comment.board.repository.CommentRepository;
 import kr.ac.kopo.ctc.comment.board.service.CommentReplyServiceImpl;
 import kr.ac.kopo.ctc.comment.board.service.CommentServiceImpl;
