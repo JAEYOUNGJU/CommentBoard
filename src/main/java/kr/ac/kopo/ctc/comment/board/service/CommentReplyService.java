@@ -9,4 +9,6 @@ public interface CommentReplyService {
 	List<CommentReply> findAll();
 
 	List<CommentReply> findOneById(Long id);
+
+	List<CommentReply> showAllByReplyId(Long id);
 }

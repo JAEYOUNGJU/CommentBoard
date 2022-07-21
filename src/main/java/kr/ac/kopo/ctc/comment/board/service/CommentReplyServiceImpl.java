@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import kr.ac.kopo.ctc.comment.board.domain.CommentReply;
 import kr.ac.kopo.ctc.comment.board.repository.CommentReplyRepository;
-
 
 @Service
 public class CommentReplyServiceImpl implements CommentReplyService {
@@ -26,7 +24,11 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 
 	@Override
 	public List<CommentReply> findOneById(Long id) {
-		// TODO Auto-generated method stub
 		return commentReplyRepository.findOneById(id);
+	}
+
+	@Override
+	public List<CommentReply> showAllByReplyId(Long id) {
+		return commentReplyRepository.findAllByCommentId(id);
 	}
 }

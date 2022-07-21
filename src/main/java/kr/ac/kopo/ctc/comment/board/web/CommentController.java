@@ -30,8 +30,7 @@ public class CommentController {
 	CommentRepository commentRepository;
 	@Autowired
 	private CommentReplyServiceImpl commentReplyServiceImpl;
-	
-	
+
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -41,17 +40,16 @@ public class CommentController {
 	// 게시판 첫 화면
 	@RequestMapping(value = "/index")
 	public String index(Model model) {
-
 		List<Comment> comments = commentServiceImpl.findAll(); // 게시글 전체 목록 보기
 		model.addAttribute("comments", comments);
 		return "index";
 	}
 
 	// 변수 1개 정도 받아와서 보여주기, 댓글 묶음이나 게시글 하나
-	@RequestMapping(value = "/selectOne/{id}") // 특정 글 상세보기
+	@RequestMapping(value = "/selectOne/{id}")
 	public String commentView(Model model, @PathVariable("id") Long id) { // controller에서 parameter 받는 방법:@pathVariable
 		model.addAttribute("selectOne", commentServiceImpl.findOneById(id)); // Model : 해당 데이터를 가지고 view까지 이동
-		model.addAttribute("selectReply", commentReplyServiceImpl.findOneById(id));
+		model.addAttribute("selectReply", commentReplyServiceImpl.showAllByReplyId(id));
 		return "selectOne";
 	}
 

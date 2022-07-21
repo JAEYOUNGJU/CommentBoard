@@ -11,6 +11,7 @@ import kr.ac.kopo.ctc.comment.board.domain.CommentReply;
 public interface CommentReplyRepository extends JpaRepository<CommentReply, Long> {
 	// selectOne
 	List<CommentReply> findOneById(Long id); // id 반환
-	
-//	Optional<CommentReply> findById(Long id);
+
+	// selectOne
+	List<CommentReply> findAllByCommentId(Long id); // id 반환
 }
