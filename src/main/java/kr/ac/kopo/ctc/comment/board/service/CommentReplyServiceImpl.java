@@ -1,5 +1,7 @@
 package kr.ac.kopo.ctc.comment.board.service;
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,10 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 
 	@Override
 	public CommentReply save(CommentReply commentReply) {
-		// TODO Auto-generated method stub
+		Date date = new Date();
+		
+		commentReply.setDate(date);
+		
 		return commentReplyRepository.save(commentReply);
 	}
 
