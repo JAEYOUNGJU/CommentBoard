@@ -32,7 +32,7 @@ public class Comment {
 	// mappedBy 양방향 관계 설정시 관계의 주체가 되는 쪽에서 정의함
 	// 부모입장에서 fetch = FetchType.LAZY 은 기본값
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "comment")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "comment")
 	private List<CommentReply> commentReplys;
 	
 	public Long getId() {
