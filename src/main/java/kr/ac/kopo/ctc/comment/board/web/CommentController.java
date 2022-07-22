@@ -62,11 +62,9 @@ public class CommentController {
 	}
 
 	@RequestMapping(value = "/insert")
-	public String commentInsert(Comment comment, CommentReply commentReply) { // 사용자가 입력한 데이터 동작 처리
+	public String commentInsert(Comment comment) { // 사용자가 입력한 데이터 동작 처리
 		comment.setDate(new Date());
-		commentReply.setDate(new Date());
 		commentRepository.save(comment);
-		commentReplyRepository.save(commentReply);
 		return "redirect:/comment/index";
 	}
 
