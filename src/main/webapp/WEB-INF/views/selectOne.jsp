@@ -34,6 +34,9 @@ textarea {
 	text-align: left;
 	resize: none;
 }
+.table {
+	border-collapse: collapse;
+}
 
 .table2 {
 	font-size: 12px;
@@ -42,7 +45,7 @@ textarea {
 
 .table3 {
 	font-size: 12px;
-	border: 1px;
+	border: 2px;
 	border-style: solid;
 	border-collapse: collapse;
 }
@@ -51,7 +54,7 @@ textarea {
 	<div align=center>
 		<br>
 		<h4>【이용후기】</h4>
-		<table cellspacing=3 width=700 border=1>
+		<table cellspacing=3 width=700 border=1 class="table">
 			<c:forEach var="comment" items="${selectOne}">
 				<tr>
 					<td bgcolor="plum" style="text-align: center" width=20><b>번호</b></td>

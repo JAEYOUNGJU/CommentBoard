@@ -17,6 +17,10 @@
 	border: solid #cdd0d1;
 	cursor: pointer;
 }
+.table {
+
+	border-collapse: collapse;
+}
 </style>
 <body>
 
@@ -25,7 +29,7 @@
 		<h4>
 			<b> ♡이용 후기를 남겨주세요♡</b>
 		</h4>
-		<table cellspacing=3 width=600 height=100 border=1>
+		<table cellspacing=3 width=600 height=100 border=1 class="table">
 			<tr>
 				<td bgcolor="plum" width=20 height=50><p align=center>
 						<b>번호</b>

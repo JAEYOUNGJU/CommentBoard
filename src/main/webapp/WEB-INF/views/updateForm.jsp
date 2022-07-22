@@ -17,7 +17,9 @@
 	border: solid #cdd0d1;
 	cursor: pointer;
 }
-
+.table {
+	border-collapse: collapse;
+}
 textarea {
 	width: 100%;
 	text-align: left;
@@ -30,7 +32,7 @@ textarea {
 <h4>【이용후기 수정】</h4>
 <c:forEach var="comment" items="${selectOne}">
 	<form action="update/${comment.id}" method="post">
-		<table cellspacing=3 width=700 border=1>
+		<table cellspacing=3 width=700 border=1 class="table">
 
 			<tr>
 				<td bgcolor="plum" width=20 style="text-align: center"><b>번호</b></td>

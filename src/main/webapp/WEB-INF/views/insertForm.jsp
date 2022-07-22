@@ -30,7 +30,9 @@ textarea {
 	text-align: left;
 	resize: none;
 }
-
+.table {
+	border-collapse: collapse;
+}
 .table2 {
 	font-size: 12px;
 }
@@ -42,7 +44,7 @@ textarea {
 			<b> ♡리뷰 작성하기♡</b>
 		</h4>
 		<form action="insert" method="post">
-			<table cellspacing=3 width=700 border=1>
+			<table cellspacing=3 width=700 border=1 class="table">
 
 				<tr>
 					<td bgcolor="plum" width=20 style="text-align: center"><b>번호</b></td>
