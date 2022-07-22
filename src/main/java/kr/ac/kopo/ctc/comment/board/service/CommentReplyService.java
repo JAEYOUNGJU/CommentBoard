@@ -16,7 +16,7 @@ public interface CommentReplyService {
 	
 	CommentReply save(CommentReply commentReply);
 
-//   //댓글 삭제
+   //댓글 삭제
    void deleteById(Long id);
 	   
 }
