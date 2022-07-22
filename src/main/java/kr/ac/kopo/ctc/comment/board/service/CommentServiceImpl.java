@@ -16,11 +16,6 @@ import kr.ac.kopo.ctc.comment.board.repository.CommentRepository;
 public class CommentServiceImpl implements CommentService { // 해당 클래스가 CommentService 인터페이스를 구현한다는 의미
 	@Autowired
 	CommentRepository commentRepository;
-
-	public CommentServiceImpl(CommentRepository commentRepository) {
-		this.commentRepository = commentRepository;
-	}
-
 	@Override
 	public List<Comment> findAll() {
 		return commentRepository.findAll();
