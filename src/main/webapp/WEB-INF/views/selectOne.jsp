@@ -99,7 +99,6 @@ textarea {
 							style="text-align: center"><b>작성자</b></td>
 						<td align=center><c:out value="${commentReply.writer}" /></td>
 
-						<!-- 		<td bgcolor="YellowGreen" width=80 style="text-align: center"><b>등록일</b></td> -->
 						<td width=100 bgcolor="lightgrey" align=center><c:out
 								value="${today}" /></td>
 
@@ -117,7 +116,7 @@ textarea {
 						<td style="border: 0"><input type="submit" value="댓글수정"
 							class="button2"></td>
 						<td><input type="button" value="댓글삭제" class="button2"
-							onClick="location.href='/comment/Reply2Delete/${commentReply.id}'" /></td>
+							onClick="location.href='/comment/ReplyDelete/${commentReply.id}'" /></td>
 					</tr>
 				</table>
 			</c:forEach>
@@ -127,33 +126,32 @@ textarea {
 		<p>
 
 			<br>
-		<form action="insert" method="post">
+		<form action="Replyinsert" method="post">
+		<input type="hidden" value="${comment.id}" name="id">
 				<table cellspacing=3 width=700 height=100 border=1 class="table2">
 
 					<tr>
-
 						<td align=center bgcolor="YellowGreen" width=80 style="text-align: center"><b>작성자</b></td>
 						<td width=50><input type="text" name="writer"required "></td>
-<%-- 						<td width=100 bgcolor="lightgrey" align=center><c:out value="${today}" /></td> --%>
-
 					</tr>
 					<tr>
 						<td bgcolor="YellowGreen" width=20 style="text-align: center"><b>댓글내용</b></td>
 						<td colspan="5"><textarea
 								style='width: 500px; height: 50px; overflow-y: scroll'
 								name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
-					
 					</tr>
 				</table>
 				<table>
 					<tr>
 						<td width=625></td>
-						<td><input type="submit" value="댓글등록" class="button2"></td>
-							</tr>
-							</table>
+						<td><input type="submit" value="댓글등록"	class="button"></a></td>
+					</tr>
+				</table>
 
 			</form>
 	</div>
+
+</form>
 </body>
 </html>
 </head>

@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.ctc.comment.board.domain.CommentReply;
 import kr.ac.kopo.ctc.comment.board.repository.CommentReplyRepository;
+import kr.ac.kopo.ctc.comment.board.repository.CommentRepository;
 
 @Service
 public class CommentReplyServiceImpl implements CommentReplyService {
+	@Autowired
+	CommentRepository commentRepository;
+
 	@Autowired
 	CommentReplyRepository commentReplyRepository;
 
@@ -33,5 +37,13 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 		commentReplyRepository.deleteById(id);
 
 	}
+
+	@Override
+	public CommentReply save(CommentReply commentReply) {
+		// TODO Auto-generated method stub
+		return commentReplyRepository.save(commentReply);
+	}
+
+
 
 }
