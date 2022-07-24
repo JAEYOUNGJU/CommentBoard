@@ -95,9 +95,6 @@ textarea {
 		</c:forEach>
 		
 		<!-- 댓글 등록 -->
-		<h4>
-			<b> ▼</b>
-		</h4>
 		<p>
 
 			<br>
@@ -123,9 +120,7 @@ textarea {
 		</form>
 		
 		<!-- 댓글 보기 -->
-		<h4>
-			<b> ▼</b>
-		</h4>
+
 		<p>
 
 			<br>
@@ -148,16 +143,14 @@ textarea {
 						<td bgcolor="YellowGreen" width=20 style="text-align: center"><b>댓글내용</b></td>
 						<td colspan="5"><textarea
 								style='width: 500px; height: 50px; overflow-y: scroll'
-								name="content" cols=70 row=100 required>${commentReply.content}</textarea></td>
+								name="content" cols=70 row=100 readonly>${commentReply.content}</textarea></td>
 					</tr>
 				</table>
 				<table>
 					<tr>
 						<td width=550></td>
-						<td style="border: 0"><input type="submit" value="댓글수정"
-							class="button2"></td>
-						<td><input type='button' value='댓글삭제' class="button2"
-							OnClick="location.href='/comment/ReplyDelete/${commentReply.id}'"></td>
+						<td style="border: 0"><input type="button" value="댓글수정" class="button2" OnClick="location.href='/comment/replyUpdateForm/${commentReply.id}'"></td>
+						<td><input type='button' value='댓글삭제' class="button2"	OnClick="location.href='/comment/ReplyDelete/${commentReply.id}'"></td>
 					</tr>
 				</table>
 			</c:forEach>

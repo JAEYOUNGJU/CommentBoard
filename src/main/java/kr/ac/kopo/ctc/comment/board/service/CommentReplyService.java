@@ -18,5 +18,7 @@ public interface CommentReplyService {
 
    //댓글 삭제
    void deleteById(Long id);
+
+void updateReply(CommentReply commentReply);
 	   
 }

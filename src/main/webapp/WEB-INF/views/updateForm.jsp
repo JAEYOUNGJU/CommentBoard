@@ -17,9 +17,11 @@
 	border: solid #cdd0d1;
 	cursor: pointer;
 }
+
 .table {
 	border-collapse: collapse;
 }
+
 textarea {
 	width: 100%;
 	text-align: left;
@@ -27,46 +29,49 @@ textarea {
 }
 </style>
 <body>
-<div align=center>
-<br>
-<h4>【이용후기 수정】</h4>
-<c:forEach var="comment" items="${selectOne}">
-	<form action="update/${comment.id}" method="post">
-		<table cellspacing=3 width=700 border=1 class="table">
+	<div align=center>
+		<br>
+		<h4>【이용후기 수정】</h4>
+		<c:forEach var="comment" items="${selectOne}">
+			<form action="update/${comment.id}" method="post">
+				<table cellspacing=3 width=700 border=1 class="table">
 
-			<tr>
-				<td bgcolor="plum" width=20 style="text-align: center"><b>번호</b></td>
-				<td><input type="number" id="id" value="${comment.id}" readonly></td>
+					<tr>
+						<td bgcolor="plum" width=20 style="text-align: center"><b>번호</b></td>
+						<td><input type="number" id="id" value="${comment.id}"
+							readonly></td>
 
-			</tr>
-			<tr>
-				<td bgcolor="plum" width=100 style="text-align: center"><b>제목</b></td>
-				<td><input type="text" name="title" value="${comment.title}"></td>
-			</tr>
-			<tr>
-				<td bgcolor="plum" width=20 style="text-align: center"><b>작성자</b></td>
-				<td><input type="text" name="writer" value="${comment.writer}" readonly></td>
-			</tr>
-			<tr>
-				<td bgcolor="plum" width=50 style="text-align: center"><b>등록일</b></td>
-				<td><c:out value="${today}" /></td>
-			</tr>
-			<tr>
-				<td bgcolor="plum" width=20 style="text-align: center"><b>내용</b></td>
-				<td><textarea style='width: 500px; height: 250px; overflow-y: scroll'
-						name="content" cols=70 row=600 required>${comment.content}</textarea></td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-			
-				<td width=600></td>
-				<td><input type="submit" value="저장"	class="button"></a></td>
-				<td><a href="../index"><input type="button" value="목록"	class="button"></a></td>
-			</tr>
-		</table>
-	</form>
-	</c:forEach>
+					</tr>
+					<tr>
+						<td bgcolor="plum" width=100 style="text-align: center"><b>제목</b></td>
+						<td><input type="text" name="title" value="${comment.title}"></td>
+					</tr>
+					<tr>
+						<td bgcolor="plum" width=20 style="text-align: center"><b>작성자</b></td>
+						<td><input type="text" name="writer"
+							value="${comment.writer}" readonly></td>
+					</tr>
+					<tr>
+						<td bgcolor="plum" width=50 style="text-align: center"><b>등록일</b></td>
+						<td><c:out value="${today}" /></td>
+					</tr>
+					<tr>
+						<td bgcolor="plum" width=20 style="text-align: center"><b>내용</b></td>
+						<td><textarea
+								style='width: 500px; height: 250px; overflow-y: scroll'
+								name="content" cols=70 row=600 required>${comment.content}</textarea></td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width=600></td>
+						<td><input type="submit" value="저장" class="button"></td>
+						<td><a href="../index"><input type="button" value="목록"
+								class="button"></a></td>
+					</tr>
+				</table>
+			</form>
+		</c:forEach>
 	</div>
 </body>
 </html>

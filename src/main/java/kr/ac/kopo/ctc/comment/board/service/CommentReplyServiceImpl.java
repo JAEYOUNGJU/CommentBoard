@@ -1,6 +1,5 @@
 package kr.ac.kopo.ctc.comment.board.service;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -43,12 +42,15 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 	@Override
 	public CommentReply save(CommentReply commentReply) {
 		Date date = new Date();
-		
 		commentReply.setDate(date);
-		
 		return commentReplyRepository.save(commentReply);
 	}
-
-
-
+	@Override
+	public void updateReply(CommentReply commentReply) {
+		Date date = new Date();
+		CommentReply updateReply = commentReplyRepository.findById(commentReply.getId()).get();
+		updateReply.setContent(commentReply.getContent());
+		updateReply.setDate(date);
+		commentReplyRepository.save(updateReply);
+	}
 }
