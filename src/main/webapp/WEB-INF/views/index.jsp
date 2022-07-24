@@ -9,7 +9,10 @@
 
 <html>
 <head>
-<title>이용후기</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<title>이용후기 게시판</title>
 </head>
 <style>
 .button {
@@ -17,18 +20,31 @@
 	border: solid #cdd0d1;
 	cursor: pointer;
 }
-.table {
+/* .button1:active {
+	background:lightblue; 
+	cursor: pointer;
 
+} */
+.button1 {
+	overflow: hidden;
+	border-radius: 5px;
+}
+
+.table {
 	border-collapse: collapse;
 }
 </style>
 <body>
 
 	<div align=center>
-		<h2>『자전거 무료대여 이용후기』</h2>
-		<h4>
-			<b> ♡이용 후기를 남겨주세요♡</b>
-		</h4>
+
+		<!-- <img src="../bike.png" width="20" height="30"> -->
+
+		<img
+			src="https://user-images.githubusercontent.com/33750251/64987392-f9eead80-d8c0-11e9-84a9-e2a4a7f624db.png"
+			width="80" height="80">
+		<h2>서울자전거 따릉이 이용후기</h2>
+
 		<table cellspacing=3 width=600 height=100 border=1 class="table">
 			<tr>
 				<td bgcolor="plum" width=20 height=50><p align=center>
@@ -64,6 +80,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+
 		<table>
 			<tr>
 				<td width=535></td>
@@ -71,6 +88,17 @@
 						class="button"></a></td>
 			</tr>
 		</table>
+
+		<form action="search" method="get" role="search">
+			
+					<select name="condition" id="condition">
+				<option value="title" <c:if test="${condition eq 'title' }">selected</c:if>>제목</option>
+				<option value="writer"	<c:if test="${condition eq 'writer' }">selected</c:if>>작성자</option>
+			</select>
+			<input type="text" name="keyword" id="search" placeholder="Search..."/>
+			<button class="icon"><i class="fa fa-search"></i>
+			</button>
+		</form>
 	</div>
 </body>
 </html>

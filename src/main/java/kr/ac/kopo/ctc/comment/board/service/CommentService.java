@@ -10,4 +10,7 @@ public interface CommentService {
 
 	List<Comment> findOneById(Long id);
 
+	List<Comment> searchWriter(String writer);
+
+	List<Comment> conditionKeywordSearch(String condition,String keyword);
 }

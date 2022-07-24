@@ -1,10 +1,12 @@
 package kr.ac.kopo.ctc.comment.board.service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
@@ -16,6 +18,7 @@ import kr.ac.kopo.ctc.comment.board.repository.CommentRepository;
 public class CommentServiceImpl implements CommentService { // 해당 클래스가 CommentService 인터페이스를 구현한다는 의미
 	@Autowired
 	CommentRepository commentRepository;
+
 	@Override
 	public List<Comment> findAll() {
 		return commentRepository.findAll();
@@ -27,4 +30,30 @@ public class CommentServiceImpl implements CommentService { // 해당 클래스�
 		return commentRepository.findOneById(id);
 	}
 
+	// Repository에서 검색결과를 받아 비즈니스 로직을 실행하는 메서드
+	@Transactional
+	public List<Comment> searchTitle(String title) {
+		List<Comment> postList = commentRepository.findByTitleContaining(title);
+
+		return postList;
+	}
+
+	@Transactional
+	public List<Comment> searchWriter(String writer) {
+		List<Comment> postList = commentRepository.findByWriterContaining(writer);
+		return postList;
+	}
+
+	@Override
+	public List<Comment> conditionKeywordSearch(String condition, String keyword) {
+		List<Comment> searchList;
+		if(condition.equals("writer")) {
+			System.out.println(condition);
+			searchList = searchWriter(keyword); //writer
+		} else {
+			searchList = searchTitle(keyword);
+		}
+		
+		return searchList;
+	}
 }

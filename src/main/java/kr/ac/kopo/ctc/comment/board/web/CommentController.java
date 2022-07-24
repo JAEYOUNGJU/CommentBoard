@@ -1,5 +1,6 @@
 package kr.ac.kopo.ctc.comment.board.web;
 
+import java.awt.print.Pageable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,18 +8,23 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
-import kr.ac.kopo.ctc.comment.board.domain.CommentReply;
 import kr.ac.kopo.ctc.comment.board.repository.CommentReplyRepository;
 import kr.ac.kopo.ctc.comment.board.repository.CommentRepository;
 import kr.ac.kopo.ctc.comment.board.service.CommentReplyServiceImpl;
+import kr.ac.kopo.ctc.comment.board.service.CommentService;
 import kr.ac.kopo.ctc.comment.board.service.CommentServiceImpl;
 
 @Controller
@@ -33,6 +39,10 @@ public class CommentController {
 	CommentReplyRepository commentReplyRepository;
 	@Autowired
 	private CommentReplyServiceImpl commentReplyServiceImpl;
+	
+
+	@Autowired
+	private CommentService commentService;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -81,10 +91,11 @@ public class CommentController {
 		return "redirect:/comment/index";
 	}
 
-	@RequestMapping(value = "/reInsert/{id}")
-	public String commentReInsert(Model model, @PathVariable("id") Long id) {
-		model.addAttribute("selectOne", commentServiceImpl.findOneById(id));
-		return "reInsert";
+	@RequestMapping(value = "/search")
+	public String search(Model model,@RequestParam(value="condition") String condition, @RequestParam(value="keyword") String keyword) {
+		List<Comment> searchList = commentService.conditionKeywordSearch(condition, keyword);		
+		model.addAttribute("comments", searchList);
+		return "index";
 	}
 
 	@RequestMapping(value = "/delete/{id}")
