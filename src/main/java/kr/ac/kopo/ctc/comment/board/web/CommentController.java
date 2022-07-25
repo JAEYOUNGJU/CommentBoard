@@ -39,7 +39,6 @@ public class CommentController {
 	CommentReplyRepository commentReplyRepository;
 	@Autowired
 	private CommentReplyServiceImpl commentReplyServiceImpl;
-	
 
 	@Autowired
 	private CommentService commentService;
@@ -56,6 +55,15 @@ public class CommentController {
 		List<Comment> comments = commentServiceImpl.findAll(); // 게시글 전체 목록 보기
 		model.addAttribute("comments", comments);
 		return "index";
+	}
+
+	// 페이징
+	@RequestMapping(value = "/list/{cPage}")
+	public String listPage(Model model, @PathVariable("cPage") int cPage) {
+		long totalCount = commentServiceImpl.getListCount();
+		model.addAttribute("pagination", commentServiceImpl.makePagination(cPage, 10, 10, (int) totalCount));
+		model.addAttribute("boardItems", commentServiceImpl.findByIdGreaterThanOrderByIdDesc(cPage));
+		return "BoardItemList";
 	}
 
 	// 변수 1개 정도 받아와서 보여주기, 댓글 묶음이나 게시글 하나
@@ -92,8 +100,9 @@ public class CommentController {
 	}
 
 	@RequestMapping(value = "/search")
-	public String search(Model model,@RequestParam(value="condition") String condition, @RequestParam(value="keyword") String keyword) {
-		List<Comment> searchList = commentService.conditionKeywordSearch(condition, keyword);		
+	public String search(Model model, @RequestParam(value = "condition") String condition,
+			@RequestParam(value = "keyword") String keyword) {
+		List<Comment> searchList = commentService.conditionKeywordSearch(condition, keyword);
 		model.addAttribute("comments", searchList);
 		return "index";
 	}

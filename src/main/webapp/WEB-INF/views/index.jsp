@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> --%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -16,15 +16,10 @@
 </head>
 <style>
 .button {
-	/* background:lightblue; */
 	border: solid #cdd0d1;
 	cursor: pointer;
 }
-/* .button1:active {
-	background:lightblue; 
-	cursor: pointer;
 
-} */
 .button1 {
 	overflow: hidden;
 	border-radius: 5px;
@@ -38,7 +33,6 @@
 
 	<div align=center>
 
-		<!-- <img src="../bike.png" width="20" height="30"> -->
 
 		<img
 			src="https://user-images.githubusercontent.com/33750251/64987392-f9eead80-d8c0-11e9-84a9-e2a4a7f624db.png"
@@ -89,14 +83,31 @@
 			</tr>
 		</table>
 
+		<!-- 페이징 -->
+		<a href='/comment/index/${pagination.ppPage}'><c:out value="<<" /></a>
+		<a href='/comment/index/${pagination.pPage}'><c:out value="<" /></a>
+
+		<c:forEach var="i" begin="${pagination.startPage}"
+			end="${pagination.lastPage}">
+			<b><a href='/comment/index/${i-1}'>${i}</a></b>
+		</c:forEach>
+
+		<a href='/comment/index/${pagination.nPage}'><c:out value=">" /></a> <a
+			href='/comment/index/${pagination.nnPage}'><c:out value=">>" /></a> <br>
+		<br>
+
+		<!-- 검색 -->
 		<form action="search" method="get" role="search">
-			
-					<select name="condition" id="condition">
-				<option value="title" <c:if test="${condition eq 'title' }">selected</c:if>>제목</option>
-				<option value="writer"	<c:if test="${condition eq 'writer' }">selected</c:if>>작성자</option>
-			</select>
-			<input type="text" name="keyword" id="search" placeholder="Search..."/>
-			<button class="icon"><i class="fa fa-search"></i>
+
+			<select name="condition" id="condition">
+				<option value="title"
+					<c:if test="${condition eq 'title' }">selected</c:if>>제목</option>
+				<option value="writer"
+					<c:if test="${condition eq 'writer' }">selected</c:if>>작성자</option>
+			</select> <input type="text" name="keyword" id="search"
+				placeholder="Search..." />
+			<button class="icon">
+				<i class="fa fa-search"></i>
 			</button>
 		</form>
 	</div>

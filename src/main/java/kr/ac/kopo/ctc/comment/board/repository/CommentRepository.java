@@ -1,14 +1,15 @@
 package kr.ac.kopo.ctc.comment.board.repository;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
-
+@Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpecificationExecutor<Comment> {
 	//JpaRepository에서 메서드명의 By 이후는 SQL의 where 조건 절에 대응됨
 	
@@ -22,5 +23,12 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpec
 	List<Comment> findByTitleContaining(String title);
 	
 	List<Comment> findByWriterContaining(String writer);
+	
+	
+	//page
+	Page<Comment> findAll(Pageable pageable);
+
+	//page 출력하기
+	Page<Comment> findByIdGreaterThanOrderByIdDesc(Long minId, Pageable pageableCondition);
 	
 }
