@@ -51,20 +51,46 @@ public class CommentController {
 
 	// 게시판 첫 화면
 	@RequestMapping(value = "/index")
-	public String index(Model model) {
-		List<Comment> comments = commentServiceImpl.findAll(); // 게시글 전체 목록 보기
-		model.addAttribute("comments", comments);
+	public String index(Model model, @RequestParam(value = "title", required = false) String keyword) {
+		Integer cPage = 0;
+		
+		if (keyword != null) { // 검색어가 있는 경우			
+			model.addAttribute("comments", commentServiceImpl.findByTitleContainingOrderByIdDesc(keyword, cPage));
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("searchpagination", commentServiceImpl.makePagination(cPage, keyword));
+		}
+
+		if (keyword == null) { // 검색어가 없는 경우
+			model.addAttribute("comments", commentServiceImpl.findByIdGreaterThanOrderByIdDesc(cPage));
+			model.addAttribute("keyword", "");
+			model.addAttribute("searchpagination", commentServiceImpl.makePagination(cPage, keyword));
+			System.out.println("공백");
+		}
+
 		return "index";
 	}
 
-	// 페이징
-	@RequestMapping(value = "/list/{cPage}")
-	public String listPage(Model model, @PathVariable("cPage") int cPage) {
-		long totalCount = commentServiceImpl.getListCount();
-		model.addAttribute("pagination", commentServiceImpl.makePagination(cPage, 10, 10, (int) totalCount));
-		model.addAttribute("boardItems", commentServiceImpl.findByIdGreaterThanOrderByIdDesc(cPage));
-		return "BoardItemList";
+	// BoardItem search - 검색어가 있는 경우
+	@RequestMapping(value = "/index/{cPage}/{keyword}")
+	public String search(Model model, @PathVariable(value = "cPage") Integer cPage,
+			@PathVariable(value = "keyword") String keyword) {
+
+		model.addAttribute("searchpagination", commentServiceImpl.makePagination(cPage, keyword));
+		model.addAttribute("comments", commentService.findByTitleContainingOrderByIdDesc(keyword, cPage));
+		model.addAttribute("keyword", keyword);
+
+		return "index";
 	}
+
+	// BoardItem search - 검색어가 없는 경우
+	@RequestMapping(value = "/index/{cPage}")
+	public String searchDefault(Model model, @PathVariable(value = "cPage") Integer cPage) {
+
+		model.addAttribute("searchpagination", commentServiceImpl.makePagination(cPage, ""));
+		model.addAttribute("comments", commentService.findByIdGreaterThanOrderByIdDesc(cPage));
+		return "index";
+	}
+
 
 	// 변수 1개 정도 받아와서 보여주기, 댓글 묶음이나 게시글 하나
 	@RequestMapping(value = "/selectOne/{id}")
@@ -97,14 +123,6 @@ public class CommentController {
 		comment.setDate(new Date());
 		commentRepository.save(comment);
 		return "redirect:/comment/index";
-	}
-
-	@RequestMapping(value = "/search")
-	public String search(Model model, @RequestParam(value = "condition") String condition,
-			@RequestParam(value = "keyword") String keyword) {
-		List<Comment> searchList = commentService.conditionKeywordSearch(condition, keyword);
-		model.addAttribute("comments", searchList);
-		return "index";
 	}
 
 	@RequestMapping(value = "/delete/{id}")

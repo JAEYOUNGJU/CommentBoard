@@ -1,13 +1,13 @@
 package kr.ac.kopo.ctc.comment.board.service;
 
-import org.springframework.data.domain.Pageable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
@@ -31,38 +31,59 @@ public class CommentServiceImpl implements CommentService { // 해당 클래스�
 		return commentRepository.findOneById(id);
 	}
 
+	//검색
 	// Repository에서 검색결과를 받아 비즈니스 로직을 실행하는 메서드
 	@Transactional
-	public List<Comment> searchTitle(String title) {
-		List<Comment> postList = commentRepository.findByTitleContaining(title);
+	public List<Comment> searchTitle(String titleKeyword) {
+		final int countPerPage = 10;
 
+		// (첫 페이지, 몇개 보여줄건지)
+		Pageable pageableCondition = PageRequest.of(0, countPerPage);
+		
+		List<Comment> postList = commentRepository.findByTitleContaining(titleKeyword, pageableCondition);
 		return postList;
 	}
 
 	@Transactional
-	public List<Comment> searchWriter(String writer) {
-		List<Comment> postList = commentRepository.findByWriterContaining(writer);
+	public List<Comment> searchWriter(String writerKeyword) {
+		final int countPerPage = 10;
+
+		// (첫 페이지, 몇개 보여줄건지)
+		Pageable pageableCondition = PageRequest.of(0, countPerPage);
+		
+		List<Comment> postList = commentRepository.findByWriterContaining(writerKeyword, pageableCondition);
 		return postList;
 	}
 
 	@Override
 	public List<Comment> conditionKeywordSearch(String condition, String keyword) {
+
 		List<Comment> searchList;
-		if(condition.equals("writer")) {
-			System.out.println(condition);
-			searchList = searchWriter(keyword); //writer
+		
+		if (condition.equals("writer")) {
+			searchList = searchWriter(keyword); // writer
 		} else {
 			searchList = searchTitle(keyword);
 		}
-		
+
 		return searchList;
 	}
-	
-	@Override
-	   public Pagination makePagination(int cPage, int countPerPage, int pageSize, int totalCount) {
-	      Pagination pagination = new Pagination(); 
 
-		
+
+	      @Override
+	      public Pagination makePagination(int cPage, String keyWord) {
+	         Pagination pagination = new Pagination(); 
+	         final int countPerPage = 10;
+	         final int pageSize = 10;
+	         int totalCount = 0;
+	         
+	         if(keyWord == null) { //검색어가 없을 때
+	            totalCount = (int) commentRepository.count();
+	         } else {   //검색어가 있을 때
+	            totalCount = (int) commentRepository.countByTitleContaining(keyWord);
+	            cPage++;
+	         }
+	      
 	      // 총페이지 계산
 	      int totalPage = (int) Math.ceil(totalCount / (double) countPerPage);
 	      if (totalPage != Math.ceil(totalCount / (double) countPerPage)) {
@@ -116,8 +137,8 @@ public class CommentServiceImpl implements CommentService { // 해당 클래스�
 	      
 	      //nnPage : 제일 마지막 페이지
 	      int nnPage = (int)Math.ceil((double)totalCount / pageSize);
+	      
 
-		
 	      pagination.setPpPage(ppPage-1);
 	      pagination.setpPage(pPage-1);
 	      pagination.setnPage(nPage-1);
@@ -126,17 +147,15 @@ public class CommentServiceImpl implements CommentService { // 해당 클래스�
 	      pagination.setStartPage(startPage);
 	      pagination.setLastPage(lastPage);
 	      pagination.setTotalPage(totalPage);
-	      pagination.setcPage(cPage);
 	      pagination.setCountPerpage(countPerPage);
 	      pagination.setTotalCount(totalCount);
 	      pagination.setPageSize(pageSize);
+	   
+	      return pagination;
 
-		
-		return pagination;
-	
-	}
-	
-	  @Override
+	   }
+
+	   @Override
 	   public List<Comment> findByIdGreaterThanOrderByIdDesc(int cPage) {
 	      final Long minId = 0L;
 	      final int countPerPage = 10;
@@ -146,13 +165,40 @@ public class CommentServiceImpl implements CommentService { // 해당 클래스�
 	      
 	      
 	      //Pagination pageCondition = makePagination()
-	      List<Comment> commentPage = commentRepository.findByIdGreaterThanOrderByIdDesc(minId, pageableCondition).toList();
+	      List<Comment> commentsPage = commentRepository.findByIdGreaterThanOrderByIdDesc(minId, pageableCondition).toList();
 	      
-	      return commentPage;
+	      return commentsPage;
 	   }
 
-	public long getListCount() {
+	   @Override
+	   public List<Comment> findByTitleContainingOrderByIdDesc(String containedWord, Integer currentPage) {
+	      final Integer articleNumber = 10;
+	      
+	      System.out.println(containedWord + "소비스");
+	      
+	      // 첫페이지, 기준 id
+	      org.springframework.data.domain.Pageable pageableCondition = PageRequest.of(currentPage, articleNumber);
+	      
+	      List<Comment> articleSearchPage = commentRepository.findByTitleContainingOrderByIdDesc(containedWord , pageableCondition).toList();
+	      
+	      return  articleSearchPage;
+	   }
+
+	@Override
+	public List<Comment> findByTitleContainingOrderByIdDesc(String keyword, int cPage) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
-}
+
+	@Override
+	public Long getListCount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long getKeywordCount(String condition, String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	}

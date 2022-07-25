@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.ctc.comment.board.domain.Comment;
@@ -20,15 +21,28 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpec
 	
 	//search
 	//By 이후에 Containing을 붙이면 Like 검색이 가능함. 즉, %{title}%이 가능함
-	List<Comment> findByTitleContaining(String title);
+	List<Comment> findByTitleContaining(String title, Pageable pageableCondition);
 	
-	List<Comment> findByWriterContaining(String writer);
-	
+	List<Comment> findByWriterContaining(String writer, Pageable pageableCondition);
 	
 	//page
 	Page<Comment> findAll(Pageable pageable);
 
 	//page 출력하기
-	Page<Comment> findByIdGreaterThanOrderByIdDesc(Long minId, Pageable pageableCondition);
+//	Page<Comment> findByIdGreaterThanOrderByIdDesc(Long minId, Pageable pageableCondition);
 	
+	//검색어있을 때 총 게시물 개수
+	/*
+	 * Long countByTitleContaining(String title);
+	 * 
+	 * Long countByWriterContaining(String writer);
+	 */
+	Page<Comment> findByTitleContainingOrderByIdDesc(String containedWord , Pageable pageableCondition);
+
+	Page<Comment> findByIdGreaterThanOrderByIdDesc(long l, Pageable pageableCondition);
+	 //search
+	   //By 이후에 Containing을 붙이면 Like 검색이 가능함. 즉, %{title}%이 가능함
+	   List<Comment> findByTitleContaining(String title);
+	   //
+	   int countByTitleContaining(String keyWord);
 }

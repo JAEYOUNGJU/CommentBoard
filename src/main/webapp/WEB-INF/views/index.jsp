@@ -33,7 +33,7 @@
 
 	<div align=center>
 
-
+	<form method=post action='/comment/index'>
 		<img
 			src="https://user-images.githubusercontent.com/33750251/64987392-f9eead80-d8c0-11e9-84a9-e2a4a7f624db.png"
 			width="80" height="80">
@@ -61,7 +61,7 @@
 						<td><p align=center>
 								<c:out value="${comment.id}" />
 							</p></td>
-						<td><a href="<c:out value="selectOne/${comment.id}"/>"><c:out
+						<td><a href="<c:out value="/comment/selectOne/${comment.id}"/>"><c:out
 									value="${comment.title}" /></a></td>
 						<td><p align=center>
 								<c:out value="${comment.writer}" />
@@ -78,39 +78,46 @@
 		<table>
 			<tr>
 				<td width=535></td>
-				<td><a href="./insertForm"><input type="button" value=글쓰기
-						class="button"></a></td>
+				<td>
+					<a href="./insertForm"><input type="button" value=글쓰기 class="button"></a>
+				</td>
 			</tr>
 		</table>
 
 		<!-- 페이징 -->
-		<a href='/comment/index/${pagination.ppPage}'><c:out value="<<" /></a>
-		<a href='/comment/index/${pagination.pPage}'><c:out value="<" /></a>
-
-		<c:forEach var="i" begin="${pagination.startPage}"
-			end="${pagination.lastPage}">
-			<b><a href='/comment/index/${i-1}'>${i}</a></b>
+		<!-- 검색 결과 -->
+		<c:forEach var="searchItem" items="${searchItems}">
+		   <tr height=80px align=center>
+		      <td><c:out value="${searchItem.id}"/></td>
+		      <td><a href= <c:url value='/comment/selectOne/${searchItem.id}'/>><c:out value="${searchItem.title}"/></a></td>
+		      <td><c:out value="${searchItem.writer}"/></td>
+		      <td><c:out value="${fn:substring(searchItem.date,0,11)}"/></td>
+		   </tr>
 		</c:forEach>
+   
+		<c:if test="${keyword != null }">
+			<input type="text" name="title" value="${keyword}">
+		</c:if>
+		
+		<c:if test="${keyword == null }">
+			<input type="text" name="title" >
+		</c:if>
+		
+		<input type="submit" value="검색">
+	</form>
+      
+	<br><br>
 
-		<a href='/comment/index/${pagination.nPage}'><c:out value=">" /></a> <a
-			href='/comment/index/${pagination.nnPage}'><c:out value=">>" /></a> <br>
-		<br>
+	<a href='/comment/index/${searchpagination.ppPage}/${keyword}'><c:out value="<<"/></a>
+	<a href='/comment/index/${searchpagination.pPage}/${keyword}'><c:out value="<"/></a>
+	
+	<c:forEach var="i" begin="${searchpagination.startPage}" end="${searchpagination.lastPage}">
+		<b><a href = '/comment/index/${i-1}/${keyword}'>${i}</a></b>
+	</c:forEach>
+	
+	<a href='/comment/index/${searchpagination.nPage}/${keyword}'><c:out value=">"/></a>
+	<a href='/comment/index/${searchpagination.nnPage}/${keyword}'><c:out value=">>"/></a>
 
-		<!-- 검색 -->
-		<form action="search" method="get" role="search">
-
-			<select name="condition" id="condition">
-				<option value="title"
-					<c:if test="${condition eq 'title' }">selected</c:if>>제목</option>
-				<option value="writer"
-					<c:if test="${condition eq 'writer' }">selected</c:if>>작성자</option>
-			</select> <input type="text" name="keyword" id="search"
-				placeholder="Search..." />
-			<button class="icon">
-				<i class="fa fa-search"></i>
-			</button>
-		</form>
-	</div>
-</body>
+ </div>
+ </body>
 </html>
-</head>
